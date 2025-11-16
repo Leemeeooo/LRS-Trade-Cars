@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LRS Trade Cars - Luxury Redefined | Premium Automotive Dealership</title>
+    <meta name="description" content="Experience luxury redefined at LRS Trade Cars. Premium selection of Mercedes, BMW, Audi, Porsche, and more. Exceptional service, competitive pricing, and seamless financing.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    
+    <!-- ECharts for Data Visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --midnight-charcoal: #1a1a1a;
+            --sterling-silver: #c0c0c0;
+            --pearl-white: #f8f8f8;
+            --racing-red: #dc2626;
+            --carbon-fiber: #2d2d2d;
+            --chrome-blue: #3b82f6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--midnight-charcoal) 0%, var(--carbon-fiber) 100%);
+            color: var(--pearl-white);
+            overflow-x: hidden;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* Liquid Metal Background Effect */
+        .liquid-metal-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, 
+                var(--midnight-charcoal) 0%, 
+                var(--carbon-fiber) 25%, 
+                var(--sterling-silver) 50%, 
+                var(--carbon-fiber) 75%, 
+                var(--midnight-charcoal) 100%);
+            background-size: 400% 400%;
+            animation: liquidFlow 15s ease-in-out infinite;
+        }
+        
+        @keyframes liquidFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        /* Hero Section Styles */
+        .hero-section {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(26, 26, 26, 0.8);
+        }
+        
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+        
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-weight: 900;
+            line-height: 0.9;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--pearl-white) 0%, var(--sterling-silver) 50%, var(--racing-red) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: colorCycle 4s ease-in-out infinite;
+        }
+        
+        @keyframes colorCycle {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(30deg); }
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 1s both;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--racing-red) 0%, #b91c1c 100%);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--pearl-white);
+            padding: 1rem 2.5rem;
+            border: 2px solid var(--sterling-silver);
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--sterling-silver);
+            color: var(--midnight-charcoal);
+            transform: translateY(-2px);
+        }
+        
+        /* Navigation Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(192, 192, 192, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            background: rgba(26, 26, 26, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--pearl-white);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--pearl-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--racing-red);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--racing-red);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Featured Vehicles Section */
+        .featured-section {
+            padding: 8rem 0;
+            background: rgba(45, 45, 45, 0.5);
+        }
+        
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--pearl-white) 0%, var(--sterling-silver) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Vehicle Cards */
+        .vehicle-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .vehicle-card {
+            background: rgba(248, 248, 248, 0.95);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        
+        .vehicle-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .vehicle-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .vehicle-card:hover .vehicle-image {
+            transform: scale(1.05);
+        }
+        
+        .vehicle-info {
+            padding: 1.5rem;
+            color: var(--midnight-charcoal);
+        }
+        
+        .vehicle-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .vehicle-price {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--racing-red);
+            margin-bottom: 1rem;
+        }
+        
+        .vehicle-specs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .vehicle-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-tag {
+            background: rgba(220, 38, 38, 0.1);
+            color: var(--racing-red);
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        /* Why Choose Us Section */
+        .why-choose-section {
+            padding: 8rem 0;
+            background: rgba(26, 26, 26, 0.8);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(248, 248, 248, 0.05);
+            border-radius: 1rem;
+            border: 1px solid rgba(192, 192, 192, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            background: rgba(248, 248, 248, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--racing-red) 0%, #b91c1c 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--pearl-white);
+        }
+        
+        .feature-description {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+        
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 8rem 0;
+            background: rgba(45, 45, 45, 0.5);
+        }
+        
+        .testimonial-carousel {
+            margin-top: 4rem;
+        }
+        
+        .testimonial-card {
+            background: rgba(248, 248, 248, 0.95);
+            color: var(--midnight-charcoal);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin: 0 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .testimonial-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        
+        .author-info p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        .rating {
+            color: #fbbf24;
+            margin-top: 0.5rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, var(--racing-red) 0%, #b91c1c 100%);
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-description {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn-white {
+            background: white;
+            color: var(--racing-red);
+            padding: 1rem 2.5rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 0 1rem;
+        }
+        
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--midnight-charcoal);
+            padding: 4rem 0 2rem;
+            border-top: 1px solid rgba(192, 192, 192, 0.1);
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--pearl-white);
+        }
+        
+        .footer-section p, .footer-section a {
+            color: rgba(248, 248, 248, 0.7);
+            text-decoration: none;
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: var(--racing-red);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(192, 192, 192, 0.1);
+            color: rgba(248, 248, 248, 0.5);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .vehicle-showcase {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+        
+        /* Animation Classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .animate-on-scroll.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .animate-card-in {
+            animation: cardSlideIn 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        @keyframes cardSlideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Splide Customization */
+        .splide__track {
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        
+        .splide__slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <!-- Liquid Metal Background -->
+    <div class="liquid-metal-bg"></div>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">LRS Trade Cars</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="inventory.html">Inventory</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title font-display split-text">LUXURY REDEFINED</h1>
+            <p class="hero-subtitle">Experience the pinnacle of automotive excellence at LRS Trade Cars</p>
+            <div class="hero-buttons">
+                <a href="inventory.html" class="btn-primary">Explore Inventory</a>
+                <a href="services.html" class="btn-secondary">Financing Options</a>
+            </div>
+        </div>
+        
+        <!-- Hero Image Carousel -->
+        <div id="hero-carousel" class="absolute inset-0 z-0">
+            <div class="splide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide">
+                            <img src="https://kimi-web-img.moonshot.cn/img/pictures.dealer.com/c44fd2f419180c28cbc723f56e62f20a97209005.jpg" alt="Luxury Showroom">
+                        </li>
+                        <li class="splide__slide">
+                            <img src="https://kimi-web-img.moonshot.cn/img/dragon2000-multisite.s3.eu-west-2.amazonaws.com/774c9a70b17f3652e515521700cd92673bd8ff91.jpg" alt="Premium Cars">
+                        </li>
+                        <li class="splide__slide">
+                            <img src="https://kimi-web-img.moonshot.cn/img/img.freepik.com/0cdfbedc36c698b72c8cd4f9d6a02973c85b8d79.jpg" alt="Luxury Vehicles">
+                        </li>
+                        <li class="splide__slide">
+                            <img src="https://kimi-web-img.moonshot.cn/img/walkthru360.com/ae86ede427e0804a89db7b019790c19788c9e923.jpg" alt="High-End Cars">
+                        </li>
+                        <li class="splide__slide">
+                            <img src="https://kimi-web-img.moonshot.cn/img/linetec.com/9f8609b1121c08b770abf2f705da9dc1009dd535.jpg" alt="Luxury Dealership">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Vehicles Section -->
+    <section class="featured-section">
+        <div class="section-container">
+            <h2 class="section-title font-display animate-on-scroll">Featured Collection</h2>
+            <p class="section-subtitle animate-on-scroll">Discover our handpicked selection of the finest luxury vehicles</p>
+            
+            <div class="vehicle-showcase" id="featured-vehicles">
+                <!-- Vehicles will be loaded by JavaScript -->
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="inventory.html" class="btn-primary">View Full Inventory</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-section">
+        <div class="section-container">
+            <h2 class="section-title font-display animate-on-scroll">Why Choose LRS Trade Cars</h2>
+            <p class="section-subtitle animate-on-scroll">Experience the difference that sets us apart in luxury automotive retail</p>
+            
+            <div class="features-grid">
+                <div class="feature-item animate-on-scroll">
+                    <div class="feature-icon">🏆</div>
+                    <h3 class="feature-title">Premium Selection</h3>
+                    <p class="feature-description">Curated collection of the world's finest luxury vehicles from Mercedes-Benz, BMW, Audi, Porsche, and more.</p>
+                </div>
+                
+                <div class="feature-item animate-on-scroll">
+                    <div class="feature-icon">💰</div>
+                    <h3 class="feature-title">Competitive Pricing</h3>
+                    <p class="feature-description">Transparent pricing with no hidden fees. We offer the best value for your investment.</p>
+                </div>
+                
+                <div class="feature-item animate-on-scroll">
+                    <div class="feature-icon">🤝</div>
+                    <h3 class="feature-title">Expert Service</h3>
+                    <p class="feature-description">Our knowledgeable team provides personalized service from selection to delivery and beyond.</p>
+                </div>
+                
+                <div class="feature-item animate-on-scroll">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Quick Financing</h3>
+                    <p class="feature-description">Fast and flexible financing options tailored to your needs with competitive rates.</p>
+                </div>
+                
+                <div class="feature-item animate-on-scroll">
+                    <div class="feature-icon">🛡️</div>
+                    <h3 class="feature-title">Quality Guarantee</h3>
+                    <p class="feature-description">Every vehicle undergoes rigorous inspection and comes with comprehensive warranty coverage.</p>
+                </div>
+                
+                <div class="feature-item animate-on-scroll">
+                    <div class="feature-icon">🚚</div>
+                    <h3 class="feature-title">Delivery Service</h3>
+                    <p class="feature-description">Premium delivery service to your location with full vehicle orientation and setup.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="section-container">
+            <h2 class="section-title font-display animate-on-scroll">Customer Testimonials</h2>
+            <p class="section-subtitle animate-on-scroll">Hear from our satisfied customers about their exceptional experiences</p>
+            
+            <div class="testimonial-carousel animate-on-scroll" id="testimonial-carousel">
+                <!-- Testimonials will be loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="section-container">
+            <h2 class="cta-title font-display animate-on-scroll">Ready to Experience Luxury?</h2>
+            <p class="cta-description animate-on-scroll">Visit our showroom or browse our online inventory to find your dream vehicle today</p>
+            <div class="hero-buttons animate-on-scroll">
+                <a href="inventory.html" class="btn-white">Browse Inventory</a>
+                <a href="contact.html" class="btn-secondary">Schedule Visit</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>LRS Trade Cars</h3>
+                <p>Luxury automotive dealership specializing in premium vehicles from the world's finest manufacturers.</p>
+                <p style="margin-top: 1rem;">
+                    📍 123 Luxury Lane<br>
+                    Manhattan, NY 10001<br>
+                    📞 (555) 123-LUXURY<br>
+                    ✉️ info@lrstradecars.com
+                </p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="inventory.html">View Inventory</a></p>
+                <p><a href="services.html">Financing</a></p>
+                <p><a href="about.html">About Us</a></p>
+                <p><a href="contact.html">Contact</a></p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Services</h3>
+                <p>Vehicle Sales</p>
+                <p>Trade-Ins</p>
+                <p>Financing Options</p>
+                <p>Extended Warranties</p>
+                <p>Premium Delivery</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Business Hours</h3>
+                <p>Monday - Friday: 9:00 AM - 8:00 PM</p>
+                <p>Saturday: 9:00 AM - 6:00 PM</p>
+                <p>Sunday: 11:00 AM - 5:00 PM</p>
+                <p style="margin-top: 1rem;">
+                    <strong>Service Center:</strong><br>
+                    Monday - Friday: 7:00 AM - 7:00 PM<br>
+                    Saturday: 8:00 AM - 4:00 PM
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 LRS Trade Cars. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="main.js"></script>
+    
+    <script>
+        // Initialize featured vehicles on homepage
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load featured vehicles (first 6 vehicles)
+            const featuredVehicles = vehicleData.slice(0, 6);
+            const container = document.getElementById('featured-vehicles');
+            
+            if (container) {
+                container.innerHTML = featuredVehicles.map(vehicle => renderVehicleCard(vehicle)).join('');
+                
+                // Add stagger animation
+                const cards = container.querySelectorAll('.vehicle-card');
+                cards.forEach((card, index) => {
+                    card.style.animationDelay = `${index * 0.1}s`;
+                    card.classList.add('animate-card-in');
+                });
+            }
+            
+            // Initialize hero carousel
+            if (typeof Splide !== 'undefined') {
+                const heroCarousel = document.querySelector('#hero-carousel .splide');
+                if (heroCarousel) {
+                    new Splide(heroCarousel, {
+                        type: 'loop',
+                        autoplay: true,
+                        interval: 4000,
+                        speed: 1000,
+                        arrows: false,
+                        pagination: false,
+                        cover: true,
+                        height: '100vh'
+                    }).mount();
+                }
+            }
+            
+            // Navbar scroll effect
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            // Initialize testimonial carousel
+            initTestimonialCarousel();
+        });
+    </script>
+</body>
+</html>

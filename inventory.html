@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Inventory - LRS Trade Cars | Premium Luxury Vehicles</title>
+    <meta name="description" content="Browse our extensive inventory of luxury vehicles. Mercedes-Benz, BMW, Audi, Porsche, Range Rover and more. Advanced search and filtering options available.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --midnight-charcoal: #1a1a1a;
+            --sterling-silver: #c0c0c0;
+            --pearl-white: #f8f8f8;
+            --racing-red: #dc2626;
+            --carbon-fiber: #2d2d2d;
+            --chrome-blue: #3b82f6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--midnight-charcoal) 0%, var(--carbon-fiber) 100%);
+            color: var(--pearl-white);
+            overflow-x: hidden;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* Liquid Metal Background Effect */
+        .liquid-metal-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, 
+                var(--midnight-charcoal) 0%, 
+                var(--carbon-fiber) 25%, 
+                var(--sterling-silver) 50%, 
+                var(--carbon-fiber) 75%, 
+                var(--midnight-charcoal) 100%);
+            background-size: 400% 400%;
+            animation: liquidFlow 15s ease-in-out infinite;
+        }
+        
+        @keyframes liquidFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        /* Navigation Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(192, 192, 192, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            background: rgba(26, 26, 26, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--pearl-white);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--pearl-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--racing-red);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--racing-red);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+            padding: 3rem 0;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .page-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--pearl-white) 0%, var(--sterling-silver) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .page-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Inventory Layout */
+        .inventory-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        
+        /* Filter Sidebar */
+        .filter-sidebar {
+            background: rgba(248, 248, 248, 0.05);
+            border-radius: 1rem;
+            padding: 2rem;
+            border: 1px solid rgba(192, 192, 192, 0.1);
+            position: sticky;
+            top: 120px;
+        }
+        
+        .filter-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--pearl-white);
+        }
+        
+        .filter-group {
+            margin-bottom: 2rem;
+        }
+        
+        .filter-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--pearl-white);
+        }
+        
+        .filter-input, .filter-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid rgba(192, 192, 192, 0.3);
+            border-radius: 0.5rem;
+            background: rgba(248, 248, 248, 0.1);
+            color: var(--pearl-white);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-input:focus, .filter-select:focus {
+            outline: none;
+            border-color: var(--racing-red);
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+        }
+        
+        .filter-input::placeholder {
+            color: rgba(248, 248, 248, 0.5);
+        }
+        
+        .price-range {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+        
+        .filter-checkbox {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .filter-checkbox input {
+            margin-right: 0.5rem;
+            accent-color: var(--racing-red);
+        }
+        
+        .clear-filters {
+            width: 100%;
+            padding: 0.75rem;
+            background: transparent;
+            border: 1px solid var(--sterling-silver);
+            color: var(--pearl-white);
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .clear-filters:hover {
+            background: var(--sterling-silver);
+            color: var(--midnight-charcoal);
+        }
+        
+        /* Inventory Content */
+        .inventory-content {
+            min-height: 600px;
+        }
+        
+        .inventory-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .results-count {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--pearl-white);
+        }
+        
+        .inventory-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .sort-select {
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(192, 192, 192, 0.3);
+            border-radius: 0.5rem;
+            background: rgba(248, 248, 248, 0.1);
+            color: var(--pearl-white);
+            font-size: 0.9rem;
+        }
+        
+        .view-toggle {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .view-btn {
+            padding: 0.5rem;
+            border: 1px solid rgba(192, 192, 192, 0.3);
+            border-radius: 0.25rem;
+            background: rgba(248, 248, 248, 0.1);
+            color: var(--pearl-white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .view-btn.active, .view-btn:hover {
+            background: var(--racing-red);
+            border-color: var(--racing-red);
+        }
+        
+        /* Vehicle Grid */
+        .vehicle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .vehicle-grid.list-view {
+            grid-template-columns: 1fr;
+        }
+        
+        .vehicle-card {
+            background: rgba(248, 248, 248, 0.95);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            color: var(--midnight-charcoal);
+        }
+        
+        .vehicle-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .vehicle-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .vehicle-card:hover .vehicle-image {
+            transform: scale(1.05);
+        }
+        
+        .vehicle-info {
+            padding: 1.5rem;
+        }
+        
+        .vehicle-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+        
+        .vehicle-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        
+        .vehicle-year {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .vehicle-rating {
+            color: #fbbf24;
+            font-size: 0.9rem;
+        }
+        
+        .vehicle-price {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--racing-red);
+            margin-bottom: 1rem;
+        }
+        
+        .vehicle-specs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+        
+        .spec-item {
+            text-align: center;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 0.25rem;
+        }
+        
+        .spec-label {
+            color: #666;
+            font-size: 0.75rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .spec-value {
+            font-weight: 600;
+        }
+        
+        .vehicle-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-tag {
+            background: rgba(220, 38, 38, 0.1);
+            color: var(--racing-red);
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .vehicle-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .btn-primary {
+            flex: 1;
+            background: var(--racing-red);
+            color: white;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary:hover {
+            background: #b91c1c;
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            flex: 1;
+            background: transparent;
+            color: var(--racing-red);
+            padding: 0.75rem;
+            border: 1px solid var(--racing-red);
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(220, 38, 38, 0.1);
+            transform: translateY(-1px);
+        }
+        
+        /* Loading State */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 400px;
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(192, 192, 192, 0.3);
+            border-top: 4px solid var(--racing-red);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            opacity: 0.7;
+        }
+        
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .empty-state p {
+            margin-bottom: 2rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .inventory-layout {
+                grid-template-columns: 250px 1fr;
+                gap: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .inventory-layout {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .filter-sidebar {
+                position: static;
+                order: 2;
+            }
+            
+            .inventory-content {
+                order: 1;
+            }
+            
+            .inventory-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .inventory-controls {
+                justify-content: space-between;
+            }
+            
+            .vehicle-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+        
+        /* Animation Classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .animate-on-scroll.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .animate-card-in {
+            animation: cardSlideIn 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        @keyframes cardSlideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Liquid Metal Background -->
+    <div class="liquid-metal-bg"></div>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">LRS Trade Cars</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="inventory.html" class="active">Inventory</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header animate-on-scroll">
+                <h1 class="page-title font-display">Vehicle Inventory</h1>
+                <p class="page-subtitle">Discover our curated collection of luxury vehicles from the world's finest manufacturers</p>
+            </div>
+            
+            <!-- Inventory Layout -->
+            <div class="inventory-layout">
+                <!-- Filter Sidebar -->
+                <aside class="filter-sidebar animate-on-scroll">
+                    <h2 class="filter-title">Filter Vehicles</h2>
+                    
+                    <form id="filter-form">
+                        <!-- Search -->
+                        <div class="filter-group">
+                            <label class="filter-label">Search</label>
+                            <input type="text" name="search" class="filter-input" placeholder="Search by make, model, or features...">
+                        </div>
+                        
+                        <!-- Make -->
+                        <div class="filter-group">
+                            <label class="filter-label">Make</label>
+                            <select name="make" class="filter-select">
+                                <option value="">All Makes</option>
+                                <option value="Mercedes-Benz">Mercedes-Benz</option>
+                                <option value="BMW">BMW</option>
+                                <option value="Audi">Audi</option>
+                                <option value="Porsche">Porsche</option>
+                                <option value="Range Rover">Range Rover</option>
+                                <option value="Tesla">Tesla</option>
+                                <option value="Lexus">Lexus</option>
+                                <option value="Cadillac">Cadillac</option>
+                                <option value="Infiniti">Infiniti</option>
+                                <option value="Genesis">Genesis</option>
+                                <option value="Jaguar">Jaguar</option>
+                                <option value="Maserati">Maserati</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Type -->
+                        <div class="filter-group">
+                            <label class="filter-label">Vehicle Type</label>
+                            <select name="type" class="filter-select">
+                                <option value="">All Types</option>
+                                <option value="Sedan">Sedan</option>
+                                <option value="SUV">SUV</option>
+                                <option value="Sports Car">Sports Car</option>
+                                <option value="Electric">Electric</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Fuel Type -->
+                        <div class="filter-group">
+                            <label class="filter-label">Fuel Type</label>
+                            <select name="fuel" class="filter-select">
+                                <option value="">All Fuel Types</option>
+                                <option value="Gasoline">Gasoline</option>
+                                <option value="Electric">Electric</option>
+                                <option value="Hybrid">Hybrid</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Price Range -->
+                        <div class="filter-group">
+                            <label class="filter-label">Price Range</label>
+                            <div class="price-range">
+                                <input type="number" name="minPrice" class="filter-input" placeholder="Min Price">
+                                <input type="number" name="maxPrice" class="filter-input" placeholder="Max Price">
+                            </div>
+                        </div>
+                        
+                        <!-- Max Mileage -->
+                        <div class="filter-group">
+                            <label class="filter-label">Maximum Mileage</label>
+                            <input type="number" name="maxMileage" class="filter-input" placeholder="Max Miles">
+                        </div>
+                        
+                        <!-- Condition -->
+                        <div class="filter-group">
+                            <label class="filter-label">Condition</label>
+                            <div class="filter-checkbox">
+                                <input type="checkbox" name="condition" value="Excellent" id="excellent">
+                                <label for="excellent">Excellent</label>
+                            </div>
+                            <div class="filter-checkbox">
+                                <input type="checkbox" name="condition" value="Very Good" id="very-good">
+                                <label for="very-good">Very Good</label>
+                            </div>
+                            <div class="filter-checkbox">
+                                <input type="checkbox" name="condition" value="Good" id="good">
+                                <label for="good">Good</label>
+                            </div>
+                        </div>
+                        
+                        <!-- Clear Filters -->
+                        <button type="button" class="clear-filters" onclick="clearAllFilters()">Clear All Filters</button>
+                    </form>
+                </aside>
+                
+                <!-- Inventory Content -->
+                <div class="inventory-content animate-on-scroll">
+                    <!-- Inventory Header -->
+                    <div class="inventory-header">
+                        <div class="results-count" id="results-count">Loading vehicles...</div>
+                        
+                        <div class="inventory-controls">
+                            <select class="sort-select" id="sort-select">
+                                <option value="">Sort By</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="year">Year: Newest First</option>
+                                <option value="mileage">Mileage: Lowest First</option>
+                            </select>
+                            
+                            <div class="view-toggle">
+                                <button class="view-btn active" data-view="grid" title="Grid View">
+                                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/>
+                                    </svg>
+                                </button>
+                                <button class="view-btn" data-view="list" title="List View">
+                                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Vehicle Grid -->
+                    <div class="vehicle-grid" id="vehicle-grid">
+                        <!-- Vehicles will be loaded by JavaScript -->
+                    </div>
+                    
+                    <!-- Empty State -->
+                    <div class="empty-state" id="empty-state" style="display: none;">
+                        <h3>No vehicles found</h3>
+                        <p>Try adjusting your filters or search criteria</p>
+                        <button class="btn-primary" onclick="clearAllFilters()">Clear Filters</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer" style="background: var(--midnight-charcoal); padding: 4rem 0 2rem; border-top: 1px solid rgba(192, 192, 192, 0.1);">
+        <div class="footer-content" style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem;">
+            <div class="footer-section">
+                <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; color: var(--pearl-white);">LRS Trade Cars</h3>
+                <p style="color: rgba(248, 248, 248, 0.7); line-height: 1.6;">Luxury automotive dealership specializing in premium vehicles from the world's finest manufacturers.</p>
+                <p style="margin-top: 1rem; color: rgba(248, 248, 248, 0.7);">
+                    📍 123 Luxury Lane<br>
+                    Manhattan, NY 10001<br>
+                    📞 (555) 123-LUXURY<br>
+                    ✉️ info@lrstradecars.com
+                </p>
+            </div>
+            
+            <div class="footer-section">
+                <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; color: var(--pearl-white);">Quick Links</h3>
+                <p><a href="index.html" style="color: rgba(248, 248, 248, 0.7); text-decoration: none; line-height: 1.6; transition: color 0.3s ease;">Home</a></p>
+                <p><a href="inventory.html" style="color: rgba(248, 248, 248, 0.7); text-decoration: none; line-height: 1.6; transition: color 0.3s ease;">Inventory</a></p>
+                <p><a href="services.html" style="color: rgba(248, 248, 248, 0.7); text-decoration: none; line-height: 1.6; transition: color 0.3s ease;">Services</a></p>
+                <p><a href="about.html" style="color: rgba(248, 248, 248, 0.7); text-decoration: none; line-height: 1.6; transition: color 0.3s ease;">About</a></p>
+                <p><a href="contact.html" style="color: rgba(248, 248, 248, 0.7); text-decoration: none; line-height: 1.6; transition: color 0.3s ease;">Contact</a></p>
+            </div>
+            
+            <div class="footer-section">
+                <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; color: var(--pearl-white);">Services</h3>
+                <p style="color: rgba(248, 248, 248, 0.7); line-height: 1.6;">Vehicle Sales</p>
+                <p style="color: rgba(248, 248, 248, 0.7); line-height: 1.6;">Trade-Ins</p>
+                <p style="color: rgba(248, 248, 248, 0.7); line-height: 1.6;">Financing Options</p>
+                <p style="color: rgba(248, 248, 248, 0.7); line-height: 1.6;">Extended Warranties</p>
+                <p style="color: rgba(248, 248, 248, 0.7); line-height: 1.6;">Premium Delivery</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; color: var(--pearl-white);">Business Hours</h3>
+                <p style="color: rgba(248, 248, 248, 0.7); line-height: 1.6;">Monday - Friday: 9:00 AM - 8:00 PM</p>
+                <p style="color: rgba(248, 248, 248, 0.7); line-height: 1.6;">Saturday: 9:00 AM - 6:00 PM</p>
+                <p style="color: rgba(248, 248, 248, 0.7); line-height: 1.6;">Sunday: 11:00 AM - 5:00 PM</p>
+                <p style="margin-top: 1rem; color: rgba(248, 248, 248, 0.7);">
+                    <strong>Service Center:</strong><br>
+                    Monday - Friday: 7:00 AM - 7:00 PM<br>
+                    Saturday: 8:00 AM - 4:00 PM
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom" style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(192, 192, 192, 0.1); color: rgba(248, 248, 248, 0.5);">
+            <p>&copy; 2024 LRS Trade Cars. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="main.js"></script>
+    
+    <script>
+        // Additional inventory-specific functionality
+        function clearAllFilters() {
+            document.getElementById('filter-form').reset();
+            filterVehicles({});
+        }
+        
+        function toggleView(view) {
+            const grid = document.getElementById('vehicle-grid');
+            const buttons = document.querySelectorAll('.view-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`[data-view="${view}"]`).classList.add('active');
+            
+            if (view === 'list') {
+                grid.classList.add('list-view');
+            } else {
+                grid.classList.remove('list-view');
+            }
+        }
+        
+        // Initialize view toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    toggleView(btn.dataset.view);
+                });
+            });
+            
+            // Navbar scroll effect
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

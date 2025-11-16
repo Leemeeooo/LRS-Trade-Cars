@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - LRS Trade Cars | Our Story & Team</title>
+    <meta name="description" content="Learn about LRS Trade Cars' journey to becoming New York's premier luxury automotive dealership. Meet our expert team and discover our commitment to excellence.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --midnight-charcoal: #1a1a1a;
+            --sterling-silver: #c0c0c0;
+            --pearl-white: #f8f8f8;
+            --racing-red: #dc2626;
+            --carbon-fiber: #2d2d2d;
+            --chrome-blue: #3b82f6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--midnight-charcoal) 0%, var(--carbon-fiber) 100%);
+            color: var(--pearl-white);
+            overflow-x: hidden;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* Liquid Metal Background Effect */
+        .liquid-metal-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, 
+                var(--midnight-charcoal) 0%, 
+                var(--carbon-fiber) 25%, 
+                var(--sterling-silver) 50%, 
+                var(--carbon-fiber) 75%, 
+                var(--midnight-charcoal) 100%);
+            background-size: 400% 400%;
+            animation: liquidFlow 15s ease-in-out infinite;
+        }
+        
+        @keyframes liquidFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        /* Navigation Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(192, 192, 192, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            background: rgba(26, 26, 26, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--pearl-white);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--pearl-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--racing-red);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--racing-red);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Hero Section */
+        .about-hero {
+            padding: 8rem 0;
+            text-align: center;
+            background: rgba(26, 26, 26, 0.8);
+        }
+        
+        .hero-title {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--pearl-white) 0%, var(--sterling-silver) 50%, var(--racing-red) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Story Section */
+        .story-section {
+            padding: 8rem 0;
+            background: rgba(45, 45, 45, 0.5);
+        }
+        
+        .story-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .story-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--pearl-white);
+        }
+        
+        .story-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        .story-image {
+            position: relative;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .story-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .story-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Mission Section */
+        .mission-section {
+            padding: 8rem 0;
+            background: rgba(26, 26, 26, 0.8);
+        }
+        
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        
+        .mission-card {
+            background: rgba(248, 248, 248, 0.05);
+            border-radius: 1.5rem;
+            padding: 3rem;
+            border: 1px solid rgba(192, 192, 192, 0.1);
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+        
+        .mission-card:hover {
+            background: rgba(248, 248, 248, 0.1);
+            transform: translateY(-10px);
+        }
+        
+        .mission-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--racing-red) 0%, #b91c1c 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 2rem;
+        }
+        
+        .mission-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--pearl-white);
+        }
+        
+        .mission-description {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+        
+        /* Team Section */
+        .team-section {
+            padding: 8rem 0;
+            background: rgba(45, 45, 45, 0.5);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--pearl-white) 0%, var(--sterling-silver) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .team-card {
+            background: rgba(248, 248, 248, 0.05);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            border: 1px solid rgba(192, 192, 192, 0.1);
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .team-card:hover {
+            background: rgba(248, 248, 248, 0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--racing-red) 0%, var(--chrome-blue) 100%);
+        }
+        
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 2rem;
+            border: 4px solid var(--racing-red);
+            transition: transform 0.3s ease;
+        }
+        
+        .team-card:hover .team-avatar {
+            transform: scale(1.1);
+        }
+        
+        .team-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--pearl-white);
+        }
+        
+        .team-position {
+            color: var(--racing-red);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .team-bio {
+            opacity: 0.8;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+        
+        .team-contact {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .contact-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid var(--racing-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--racing-red);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-link:hover {
+            background: var(--racing-red);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 8rem 0;
+            background: rgba(26, 26, 26, 0.8);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .testimonial-card {
+            background: rgba(248, 248, 248, 0.95);
+            color: var(--midnight-charcoal);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .testimonial-content {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        
+        .author-info p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        .rating {
+            color: #fbbf24;
+            margin-top: 0.5rem;
+        }
+        
+        .quote-icon {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 3rem;
+            color: var(--racing-red);
+            opacity: 0.3;
+        }
+        
+        /* Awards Section */
+        .awards-section {
+            padding: 8rem 0;
+            background: rgba(45, 45, 45, 0.5);
+        }
+        
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .award-card {
+            background: rgba(248, 248, 248, 0.05);
+            border-radius: 1rem;
+            padding: 2rem;
+            border: 1px solid rgba(192, 192, 192, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .award-card:hover {
+            background: rgba(248, 248, 248, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .award-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .award-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--pearl-white);
+        }
+        
+        .award-year {
+            color: var(--racing-red);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .award-description {
+            opacity: 0.8;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--racing-red) 0%, #b91c1c 100%);
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-description {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn-white {
+            background: white;
+            color: var(--racing-red);
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 0 1rem;
+        }
+        
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid white;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 0 1rem;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: var(--racing-red);
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--midnight-charcoal);
+            padding: 4rem 0 2rem;
+            border-top: 1px solid rgba(192, 192, 192, 0.1);
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--pearl-white);
+        }
+        
+        .footer-section p, .footer-section a {
+            color: rgba(248, 248, 248, 0.7);
+            text-decoration: none;
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: var(--racing-red);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(192, 192, 192, 0.1);
+            color: rgba(248, 248, 248, 0.5);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .story-container,
+            .calculator-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .story-image {
+                order: -1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .story-container {
+                gap: 2rem;
+            }
+            
+            .mission-grid,
+            .team-grid,
+            .testimonial-grid,
+            .awards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Animation Classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .animate-on-scroll.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Liquid Metal Background -->
+    <div class="liquid-metal-bg"></div>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">LRS Trade Cars</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="inventory.html">Inventory</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="about-hero">
+            <div class="container">
+                <h1 class="hero-title font-display animate-on-scroll">Our Story</h1>
+                <p class="hero-subtitle animate-on-scroll">A legacy of excellence in luxury automotive retail, built on passion, integrity, and unmatched customer service</p>
+            </div>
+        </section>
+        
+        <!-- Story Section -->
+        <section class="story-section">
+            <div class="container">
+                <div class="story-container animate-on-scroll">
+                    <div class="story-content">
+                        <h2 class="font-display">Founded on Passion</h2>
+                        <p>LRS Trade Cars was born from a simple yet powerful vision: to create the ultimate luxury car buying experience. Founded in 2010 by automotive enthusiasts with decades of industry experience, we recognized a gap in the market for a dealership that truly understood the needs of discerning luxury car buyers.</p>
+                        <p>What started as a small showroom in Manhattan has grown into New York's premier destination for luxury vehicles, serving clients from across the tri-state area and beyond. Our journey has been marked by continuous growth, innovation, and an unwavering commitment to excellence.</p>
+                        <p>Today, we're proud to offer one of the most comprehensive selections of luxury vehicles in the region, backed by a team of experts who share our passion for automotive excellence and customer satisfaction.</p>
+                    </div>
+                    
+                    <div class="story-image">
+                        <img src="https://kimi-web-img.moonshot.cn/img/pictures.dealer.com/c44fd2f419180c28cbc723f56e62f20a97209005.jpg" alt="LRS Trade Cars Showroom">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Mission Section -->
+        <section class="mission-section">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <h2 class="section-title font-display">Our Mission & Values</h2>
+                    <p class="section-subtitle">Guiding principles that drive everything we do</p>
+                </div>
+                
+                <div class="mission-grid">
+                    <div class="mission-card animate-on-scroll">
+                        <div class="mission-icon">🎯</div>
+                        <h3 class="mission-title">Excellence</h3>
+                        <p class="mission-description">We strive for perfection in every aspect of our business, from our curated vehicle selection to our white-glove customer service.</p>
+                    </div>
+                    
+                    <div class="mission-card animate-on-scroll">
+                        <div class="mission-icon">🤝</div>
+                        <h3 class="mission-title">Integrity</h3>
+                        <p class="mission-description">Transparent pricing, honest communication, and ethical business practices form the foundation of our customer relationships.</p>
+                    </div>
+                    
+                    <div class="mission-card animate-on-scroll">
+                        <div class="mission-icon">💡</div>
+                        <h3 class="mission-title">Innovation</h3>
+                        <p class="mission-description">We continuously embrace new technologies and processes to enhance the luxury car buying experience.</p>
+                    </div>
+                    
+                    <div class="mission-card animate-on-scroll">
+                        <div class="mission-icon">❤️</div>
+                        <h3 class="mission-title">Passion</h3>
+                        <p class="mission-description">Our love for luxury automobiles drives us to share that passion with every customer who walks through our doors.</p>
+                    </div>
+                    
+                    <div class="mission-card animate-on-scroll">
+                        <div class="mission-icon">🌟</div>
+                        <h3 class="mission-title">Service</h3>
+                        <p class="mission-description">Personalized attention and exceptional service standards that exceed expectations at every touchpoint.</p>
+                    </div>
+                    
+                    <div class="mission-card animate-on-scroll">
+                        <div class="mission-icon">🏆</div>
+                        <h3 class="mission-title">Quality</h3>
+                        <p class="mission-description">Every vehicle in our inventory is carefully selected and thoroughly inspected to meet our exacting standards.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Team Section -->
+        <section class="team-section">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <h2 class="section-title font-display">Meet Our Team</h2>
+                    <p class="section-subtitle">Expert professionals dedicated to delivering exceptional service</p>
+                </div>
+                
+                <div class="team-grid">
+                    <div class="team-card animate-on-scroll">
+                        <img src="https://images.unsplash.com/photo-1472099645783-565afab2f8b4?w=150&h=150&fit=crop&crop=face" alt="Michael Rodriguez" class="team-avatar">
+                        <h3 class="team-name">Michael Rodriguez</h3>
+                        <p class="team-position">General Manager</p>
+                        <p class="team-bio">With over 20 years in luxury automotive retail, Michael leads our team with vision and expertise. His passion for exceptional customer service has been instrumental in building our reputation.</p>
+                        <div class="team-contact">
+                            <a href="mailto:michael@lrstradecars.com" class="contact-link">📧</a>
+                            <a href="tel:+15551234567" class="contact-link">📞</a>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card animate-on-scroll">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face" alt="Sarah Chen" class="team-avatar">
+                        <h3 class="team-name">Sarah Chen</h3>
+                        <p class="team-position">Sales Director</p>
+                        <p class="team-bio">Sarah brings extensive knowledge of luxury vehicles and a commitment to finding the perfect match for each client. Her attention to detail ensures a seamless buying experience.</p>
+                        <div class="team-contact">
+                            <a href="mailto:sarah@lrstradecars.com" class="contact-link">📧</a>
+                            <a href="tel:+15551234568" class="contact-link">📞</a>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card animate-on-scroll">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="David Thompson" class="team-avatar">
+                        <h3 class="team-name">David Thompson</h3>
+                        <p class="team-position">Finance Manager</p>
+                        <p class="team-bio">David specializes in luxury vehicle financing, offering creative solutions and competitive rates. His expertise helps clients secure the best possible financing terms.</p>
+                        <div class="team-contact">
+                            <a href="mailto:david@lrstradecars.com" class="contact-link">📧</a>
+                            <a href="tel:+15551234569" class="contact-link">📞</a>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card animate-on-scroll">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Lisa Wang" class="team-avatar">
+                        <h3 class="team-name">Lisa Wang</h3>
+                        <p class="team-position">Client Relations Manager</p>
+                        <p class="team-bio">Lisa ensures every client receives personalized attention throughout their journey. Her dedication to customer satisfaction has earned her numerous accolades.</p>
+                        <div class="team-contact">
+                            <a href="mailto:lisa@lrstradecars.com" class="contact-link">📧</a>
+                            <a href="tel:+15551234570" class="contact-link">📞</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Testimonials Section -->
+        <section class="testimonials-section">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <h2 class="section-title font-display">Customer Testimonials</h2>
+                    <p class="section-subtitle">Hear from our satisfied customers about their experiences</p>
+                </div>
+                
+                <div class="testimonial-grid">
+                    <div class="testimonial-card animate-on-scroll">
+                        <div class="quote-icon">"</div>
+                        <p class="testimonial-content">Outstanding experience from start to finish! The team at LRS Trade Cars made my dream car purchase seamless. Professional, knowledgeable, and transparent throughout the entire process.</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face" alt="Sarah Johnson" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Sarah Johnson</h4>
+                                <p>Manhattan, NY</p>
+                                <div class="rating">★★★★★</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card animate-on-scroll">
+                        <div class="quote-icon">"</div>
+                        <p class="testimonial-content">Best car dealership experience I've ever had. They had exactly what I was looking for, and the financing options were incredible. Highly recommend LRS Trade Cars to anyone looking for luxury vehicles.</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Michael Chen" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Michael Chen</h4>
+                                <p>Brooklyn, NY</p>
+                                <div class="rating">★★★★★</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card animate-on-scroll">
+                        <div class="quote-icon">"</div>
+                        <p class="testimonial-content">Luxury service at its finest! The attention to detail and customer care exceeded my expectations. Will definitely be back for my next purchase. Thank you for an amazing experience!</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Emily Rodriguez" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Emily Rodriguez</h4>
+                                <p>Queens, NY</p>
+                                <div class="rating">★★★★★</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card animate-on-scroll">
+                        <div class="quote-icon">"</div>
+                        <p class="testimonial-content">Great selection of luxury vehicles and competitive pricing. The staff was helpful and not pushy at all. Smooth transaction and excellent after-sales support. Highly recommended!</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1472099645783-565afab2f8b4?w=150&h=150&fit=crop&crop=face" alt="David Thompson" class="author-avatar">
+                            <div class="author-info">
+                                <h4>David Thompson</h4>
+                                <p>Bronx, NY</p>
+                                <div class="rating">★★★★☆</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card animate-on-scroll">
+                        <div class="quote-icon">"</div>
+                        <p class="testimonial-content">Impressed with their electric vehicle selection and knowledge. The team helped me understand all the features and made the transition to EV effortless. Five stars all around!</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face" alt="Lisa Wang" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Lisa Wang</h4>
+                                <p>Staten Island, NY</p>
+                                <div class="rating">★★★★★</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card animate-on-scroll">
+                        <div class="quote-icon">"</div>
+                        <p class="testimonial-content">Professional, courteous, and knowledgeable staff. The entire process was smooth and transparent. I got a great deal on my dream car and couldn't be happier!</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face" alt="James Miller" class="author-avatar">
+                            <div class="author-info">
+                                <h4>James Miller</h4>
+                                <p>Westchester, NY</p>
+                                <div class="rating">★★★★★</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Awards Section -->
+        <section class="awards-section">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <h2 class="section-title font-display">Awards & Recognition</h2>
+                    <p class="section-subtitle">Industry recognition for our commitment to excellence</p>
+                </div>
+                
+                <div class="awards-grid">
+                    <div class="award-card animate-on-scroll">
+                        <div class="award-icon">🏆</div>
+                        <h3 class="award-title">Best Luxury Dealership</h3>
+                        <p class="award-year">2024</p>
+                        <p class="award-description">New York Automotive Excellence Awards</p>
+                    </div>
+                    
+                    <div class="award-card animate-on-scroll">
+                        <div class="award-icon">⭐</div>
+                        <h3 class="award-title">Customer Service Excellence</h3>
+                        <p class="award-year">2023</p>
+                        <p class="award-description">Luxury Retail Association</p>
+                    </div>
+                    
+                    <div class="award-card animate-on-scroll">
+                        <div class="award-icon">🌟</div>
+                        <h3 class="award-title">Top Rated Dealer</h3>
+                        <p class="award-year">2023</p>
+                        <p class="award-description">Google Reviews & DealerRater</p>
+                    </div>
+                    
+                    <div class="award-card animate-on-scroll">
+                        <div class="award-icon">💎</div>
+                        <h3 class="award-title">Premium Service Provider</h3>
+                        <p class="award-year">2022</p>
+                        <p class="award-description">Luxury Consumer Institute</p>
+                    </div>
+                    
+                    <div class="award-card animate-on-scroll">
+                        <div class="award-icon">🥇</div>
+                        <h3 class="award-title">Industry Leadership</h3>
+                        <p class="award-year">2022</p>
+                        <p class="award-description">National Auto Dealers Association</p>
+                    </div>
+                    
+                    <div class="award-card animate-on-scroll">
+                        <div class="award-icon">🏅</div>
+                        <h3 class="award-title">Community Excellence</h3>
+                        <p class="award-year">2021</p>
+                        <p class="award-description">Manhattan Business Council</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Call to Action Section -->
+        <section class="cta-section">
+            <div class="container">
+                <h2 class="cta-title font-display animate-on-scroll">Experience the LRS Difference</h2>
+                <p class="cta-description animate-on-scroll">Ready to find your dream vehicle? Visit our showroom or browse our online inventory to begin your luxury car journey.</p>
+                <div class="animate-on-scroll">
+                    <a href="inventory.html" class="btn-white">Browse Inventory</a>
+                    <a href="contact.html" class="btn-secondary">Schedule Visit</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>LRS Trade Cars</h3>
+                <p>Luxury automotive dealership specializing in premium vehicles from the world's finest manufacturers.</p>
+                <p style="margin-top: 1rem;">
+                    📍 123 Luxury Lane<br>
+                    Manhattan, NY 10001<br>
+                    📞 (555) 123-LUXURY<br>
+                    ✉️ info@lrstradecars.com
+                </p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="index.html">Home</a></p>
+                <p><a href="inventory.html">Inventory</a></p>
+                <p><a href="services.html">Services</a></p>
+                <p><a href="about.html">About</a></p>
+                <p><a href="contact.html">Contact</a></p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Services</h3>
+                <p>Vehicle Sales</p>
+                <p>Trade-Ins</p>
+                <p>Financing Options</p>
+                <p>Extended Warranties</p>
+                <p>Premium Delivery</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Business Hours</h3>
+                <p>Monday - Friday: 9:00 AM - 8:00 PM</p>
+                <p>Saturday: 9:00 AM - 6:00 PM</p>
+                <p>Sunday: 11:00 AM - 5:00 PM</p>
+                <p style="margin-top: 1rem;">
+                    <strong>Service Center:</strong><br>
+                    Monday - Friday: 7:00 AM - 7:00 PM<br>
+                    Saturday: 8:00 AM - 4:00 PM
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 LRS Trade Cars. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="main.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Navbar scroll effect
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
